@@ -56,16 +56,30 @@
 
   <script>
     let drugs = [
-      { image: "drug1.jpg", answer: "药品1" },
-      { image: "drug2.jpg", answer: "药品2" },
-      { image: "drug3.jpg", answer: "药品3" },
-      { image: "drug4.jpg", answer: "药品4" }
+      { image: "1.gif", answer: "青葙子" },
+      { image: "2.gif", answer: "车前子" },
+      { image: "3.gif", answer: "王不留行" },
+      { image: "4.gif", answer: "白薇" }
     ];
 
-    let currentDrugIndex = 0;
+    let usedDrugIndexes = []; // 用于存储已经使用过的药品索引
 
     function getRandomDrugIndex() {
-      return Math.floor(Math.random() * drugs.length);
+      if (usedDrugIndexes.length === drugs.length) {
+        // 如果所有药品都已经使用过，重新开始
+        usedDrugIndexes = [];
+      }
+
+      let randomIndex = Math.floor(Math.random() * drugs.length);
+
+      while (usedDrugIndexes.includes(randomIndex)) {
+        // 如果随机生成的索引已经使用过，继续生成随机索引
+        randomIndex = Math.floor(Math.random() * drugs.length);
+      }
+
+      usedDrugIndexes.push(randomIndex); // 将使用过的索引添加到数组中
+
+      return randomIndex;
     }
 
     function checkAnswer() {
@@ -73,9 +87,9 @@
       const correctAnswer = drugs[currentDrugIndex].answer;
 
       if (userInput === correctAnswer) {
-        alert("回答正确！");
+        nextDrug();
       } else {
-        alert("回答错误！");
+        document.getElementById("answer-input").value = "";
       }
     }
 
@@ -91,6 +105,7 @@
     }
 
     // 初始加载
+    let currentDrugIndex = getRandomDrugIndex();
     nextDrug();
   </script>
 </body>
