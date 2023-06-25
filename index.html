@@ -1,73 +1,87 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>选择正确的药品名字</title>
+  <title>药品识别网页</title>
   <style>
-    .drug-image {
-      width: 200px;
-      height: 200px;
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    h2 {
+      margin-top: 40px;
+    }
+
+    input[type="text"] {
+      margin-right: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
     }
   </style>
 </head>
 <body>
-  <h1>选择正确的药品名字</h1>
+ <div id="result"></div>
 
-  <div id="drug-container">
-    <img class="drug-image" id="drug-image" src="" alt="Drug Image">
-    <br>
-    <input type="text" id="user-answer" placeholder="请输入药品名字">
-    <button onclick="checkAnswer()">确认</button>
-  </div>
+  <h2>输入正确的药品名字</h2>
+  <input type="text" id="answer-input">
+  <button onclick="checkAnswer()">确认</button>
+
+  <h2>切换下一个药品</h2>
+  <button onclick="nextDrug()">下一个</button>
 
   <script>
-    // 药品图片和名称的数组
-    var drugs = [
-      { image: "drug1.jpg", name: "药品1" },
-      { image: "drug2.jpg", name: "药品2" },
-      { image: "drug3.jpg", name: "药品3" }
-      // 可以添加更多的药品图片和名称
+    let drugs = [
+      { image: "drug1.jpg", answer: "药品1" },
+      { image: "drug2.jpg", answer: "药品2" },
+      { image: "drug3.jpg", answer: "药品3" },
+      { image: "drug4.jpg", answer: "药品4" }
     ];
 
-    var currentIndex = -1;
+    let currentDrugIndex = 0;
 
-    // 初始化页面，显示第一张药品图片
-    function init() {
-      nextDrug();
+    function getRandomDrugIndex() {
+      return Math.floor(Math.random() * drugs.length);
     }
 
-    // 检查用户输入的答案是否正确
     function checkAnswer() {
-      var userAnswer = document.getElementById("user-answer").value;
-      var currentDrug = drugs[currentIndex];
+      const userInput = document.getElementById("answer-input").value.trim();
+      const correctAnswer = drugs[currentDrugIndex].answer;
 
-      if (userAnswer.toLowerCase() === currentDrug.name.toLowerCase()) {
+      if (userInput === correctAnswer) {
         alert("回答正确！");
-        nextDrug();
       } else {
-        alert("回答错误！请再试一次。");
+        alert("回答错误！");
       }
-
-      // 清空输入框
-      document.getElementById("user-answer").value = "";
     }
 
-    // 显示下一张药品图片
     function nextDrug() {
-      currentIndex++;
+      currentDrugIndex = getRandomDrugIndex();
 
-      // 判断是否超出药品数组的长度，如果是，重新开始
-      if (currentIndex >= drugs.length) {
-        currentIndex = 0;
-      }
-
-      var currentDrug = drugs[currentIndex];
-      var drugImage = document.getElementById("drug-image");
-      drugImage.src = currentDrug.image;
-      drugImage.alt = currentDrug.name;
+      const resultDiv = document.getElementById("result");
+      resultDiv.innerHTML = "";
+      document.getElementById("answer-input").value = "";
+      const image = document.createElement("img");
+      image.src = drugs[currentDrugIndex].image;
+      resultDiv.appendChild(image);
     }
 
-    // 页面加载完成后初始化
-    window.onload = init;
+    // 初始加载
+    nextDrug();
   </script>
 </body>
 </html>
