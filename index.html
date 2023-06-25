@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表单验证</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+  </head>
+<body>
+  <div>
+        <form novalidate onsubmit="handleFormSubitEvent(event);"> 
+            <div class="container"><br>
+                <div class="row">
+                    <h1 style="text-align: center;">注册表单</h1>
+            <div class="col-6">
+                <label  class="form-label">账号</label>
+                <input type="text" class="form-control" id="validationDefault01"  required minlength="3" maxlength="16" pattern="^[a-zA-Z]\w{3,16}$"> 
+                <div class="valid-feedback">√</div>
+                <div class="invalid-feedback">请输入3-16个数字，字母，下划线</div>  
+              </div>
+                <div class="col-6 row">
+                  <label for="exampleFormControlInput1" class="form-label" >密码</label>
+                  <div class="col">
+                    <input type="password" class="form-control" required minlength="8" maxlength="16" > 
+                  <div class="valid-feedback">验证通过</div>
+                  <div class="invalid-feedback">请输入8-16位密码</div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-3">
+                    <label  class="form-label">姓名</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" required minlength="2" maxlength="6" pattern="^[\u4e00-\u9fa5]{0,}$"> 
+                    <div class="valid-feedback">验证通过</div>
+                  <div class="invalid-feedback">请输入请输入2-6个汉字</div>
+                  </div>
+                    <div class="col-6">
+                      <label  class="form-label">学号</label>
+                      <input type="text" class="form-control" id="exampleInputEmail1"  value="306" required maxlength="11" minlength="11"  pattern="^(306[0-9])\d{7}$">
+                      <div class="valid-feedback">验证通过</div>
+                      <div class="invalid-feedback">学号为306开头11位整数</div>
+                      </div>
+                      <div class="col">
+                          <label  class="form-label">年龄</label><br>
+                          <input type="text" class="form-control" id="exampleInputEmail1" required minlength="0" maxlength="3" max="200">
+                          <div class="valid-feedback">验证通过</div>
+                          <div class="invalid-feedback">年龄为0-200岁</div>
+                        </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-6"><br>
+                                <label  class="form-label">手机号</label>
+                                <input type="text" class="form-control" id="exampleInputEmail1" required  minlength="11" maxlength="11" pattern="^(13[0-9]|14[0-9]|15[0-9]|16[0-9]|17[0-9]|18[0-9]|19[0-9])\d{8}$">
+                                <div class="valid-feedback">验证通过</div>
+                                <div class="invalid-feedback">请输入11位手机号</div>
+                                </div>
+                                <div class="col"><br>
+                                    <label class="form-label">推荐人</label>
+                                    <select class="form-select form-select-col" aria-label=".form-select-sm example" required >
+                                        <option selected> </option>
+                                        <option value="1">丁黎明</option>
+                                        <option value="2">赫磊</option>
+                                    </select>
+                                    <div class="valid-feedback">验证通过</div>
+                                    <div class="invalid-feedback">请选择推荐人</div>
+                                    </div>
+                                </div>
+                
+                <div class="d-grid gap-2"><br>
+                    <button class="btn btn-primary" type="submit">注册</button>
+                    </div>    
+        </div> 
+        
+        <script>
+          function handleFormSubitEvent(event){
+            if (!event.target.checkValidity()){
+              event.preventDefault();
+              event.stopPropagation();
+
+            }
+            event.target.classList.add('was-validated')
+          }
+        </script>
+</body>
+</html>
