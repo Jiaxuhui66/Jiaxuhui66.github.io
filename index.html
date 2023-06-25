@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>纪念日</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -12,6 +13,23 @@
         h1 {
             color: #333;
             font-size: 60px; /* 增加标题字体大小 */
+            position: relative; /* 添加相对定位 */
+        }
+
+        p::before,
+        p::after {
+            content: "❤️"; /* 添加爱心符号 */
+            color: red; /* 设置爱心颜色 */
+            position: absolute; /* 添加绝对定位 */
+            top: 0;
+        }
+
+        p::before {
+            left: 100px; /* 调整左侧爱心的位置 */
+        }
+
+       p::after {
+            right: 100px; /* 调整右侧爱心的位置 */
         }
 
         p {
@@ -25,11 +43,12 @@
             height: auto;
             display: block;
             margin: 0 auto;
+            border: 2px solid #333; /* Add a border with 2px width and color #333 */
+            padding: 10px; /* Add some padding around the image */
         }
     </style>
 </head>
 <body>
-    
     <p id="days"></p>
     <img src="https://i.postimg.cc/bNXGHmfy/image.jpg" alt="纪念日图片">
 
