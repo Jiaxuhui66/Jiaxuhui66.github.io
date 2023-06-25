@@ -1,112 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>药品识别网页</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-
-    h1 {
-      text-align: center;
-    }
-
-    h2 {
-      margin-top: 40px;
-    }
-
-    input[type="text"] {
-      margin-right: 10px;
-      width: 80%;
-      height: 40px;
-      font-size: 16px;
-      padding: 5px;
-    }
-
-    button {
-      padding: 10px 20px;
-      background-color: #007bff;
-      color: #fff;
-      border: none;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #0056b3;
-    }
-  </style>
+    <title>纪念日</title>
 </head>
 <body>
+    <h1>我们在一起的天数</h1>
+    <p id="days"></p>
 
-  <div id="result"></div>
+    <script>
+        // 获取起始日期和当前日期
+        var startDate = new Date("2022-02-14");
+        var currentDate = new Date();
 
-  <h2>输入正确的药品名字</h2>
-  <input type="text" id="answer-input">
-  <button onclick="checkAnswer()">确认</button>
+        // 计算天数
+        var timeDiff = Math.abs(currentDate.getTime() - startDate.getTime());
+        var daysTogether = Math.ceil(timeDiff / (1000 * 3600 * 24));
 
-  <h2>切换下一个药品</h2>
-  <button onclick="nextDrug()">下一个</button>
-
-  <script>
-    let drugs = [
-      { image: "1.gif", answer: "青葙子" },
-      { image: "2.gif", answer: "车前子" },
-      { image: "3.gif", answer: "王不留行" },
-      { image: "4.gif", answer: "白薇" }
-    ];
-
-    let usedDrugIndexes = []; // 用于存储已经使用过的药品索引
-
-    function getRandomDrugIndex() {
-      if (usedDrugIndexes.length === drugs.length) {
-        // 如果所有药品都已经使用过，重新开始
-        usedDrugIndexes = [];
-      }
-
-      let randomIndex = Math.floor(Math.random() * drugs.length);
-
-      while (usedDrugIndexes.includes(randomIndex)) {
-        // 如果随机生成的索引已经使用过，继续生成随机索引
-        randomIndex = Math.floor(Math.random() * drugs.length);
-      }
-
-      usedDrugIndexes.push(randomIndex); // 将使用过的索引添加到数组中
-
-      return randomIndex;
-    }
-
-    function checkAnswer() {
-      const userInput = document.getElementById("answer-input").value.trim();
-      const correctAnswer = drugs[currentDrugIndex].answer;
-
-      if (userInput === correctAnswer) {
-        nextDrug();
-      } else {
-        document.getElementById("answer-input").value = "";
-      }
-    }
-
-    function nextDrug() {
-      currentDrugIndex = getRandomDrugIndex();
-
-      const resultDiv = document.getElementById("result");
-      resultDiv.innerHTML = "";
-      document.getElementById("answer-input").value = "";
-      const image = document.createElement("img");
-      image.src = drugs[currentDrugIndex].image;
-      resultDiv.appendChild(image);
-    }
-
-    // 初始加载
-    let currentDrugIndex = getRandomDrugIndex();
-    nextDrug();
-  </script>
+        // 将天数显示在页面上
+        document.getElementById("days").innerHTML = "我们在一起已经 " + daysTogether + " 天了！";
+    </script>
 </body>
 </html>
