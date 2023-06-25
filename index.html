@@ -1,68 +1,104 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>纪念日</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #f2f2f2;
-        }
+<title>纪念日</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body {
+font-family: Arial, sans-serif;
+text-align: center;
+background-color: #f2f2f2;
+}
 
-        h1 {
-            color: #333;
-            font-size: 60px; /* 增加标题字体大小 */
-            position: relative; /* 添加相对定位 */
-        }
+    h1 {
+        color: #333;
+        font-size: 60px; /* 增加标题字体大小 */
+        position: relative; /* 添加相对定位 */
+    }
 
-        p::before,
-        p::after {
-            content: "❤️"; /* 添加爱心符号 */
-            color: red; /* 设置爱心颜色 */
-            position: absolute; /* 添加绝对定位 */
-            top: 0;
-        }
+    .heart-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 
-        p::before {
-            left: 100px; /* 调整左侧爱心的位置 */
-        }
+    .heart {
+        width: 50px;
+        height: 50px;
+        background-color: red;
+        position: relative;
+        transform-origin: center;
+        animation: heartbeat 1s infinite;
+    }
 
-       p::after {
-            right: 100px; /* 调整右侧爱心的位置 */
-        }
+    .heart::before,
+    .heart::after {
+        content: '';
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        background-color: red;
+        border-radius: 50px 50px 0 0;
+    }
 
-        p {
-            font-size: 40px; /* 增加正文字体大小 */
-            color: #666;
-        }
+    .heart::before {
+        top: -25px;
+        left: 0;
+    }
 
-        img {
-            width: 80%;
-            max-width: 400px;
-            height: auto;
-            display: block;
-            margin: 0 auto;
-            border: 2px solid #333; /* Add a border with 2px width and color #333 */
-            padding: 10px; /* Add some padding around the image */
+    .heart::after {
+        top: 0;
+        left: 25px;
+        border-radius: 50px 50px 50px 0;
+    }
+
+    p {
+        font-size: 40px; /* 增加正文字体大小 */
+        color: #666;
+    }
+
+    img {
+        width: 80%;
+        max-width: 400px;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+        border: 2px solid #333; /* Add a border with 2px width and color #333 */
+        padding: 10px; /* Add some padding around the image */
+    }
+
+    @keyframes heartbeat {
+        0% {
+            transform: scale(1) rotate(-45deg);
         }
-    </style>
+        50% {
+            transform: scale(1.2) rotate(-45deg);
+        }
+        100% {
+            transform: scale(1) rotate(-45deg);
+        }
+    }
+</style>
 </head>
 <body>
-    <p id="days"></p>
-    <img src="https://i.postimg.cc/bNXGHmfy/image.jpg" alt="纪念日图片">
+<div class="heart-container">
 
-    <script>
-        // 获取起始日期和当前日期
-        var startDate = new Date("2022-02-14");
-        var currentDate = new Date();
+<p id="days"></p>
+<div class="heart"></div>
+</div>
+<img src="https://i.postimg.cc/bNXGHmfy/image.jpg" alt="纪念日图片">
 
-        // 计算天数
-        var timeDiff = Math.abs(currentDate.getTime() - startDate.getTime());
-        var daysTogether = Math.ceil(timeDiff / (1000 * 3600 * 24));
+<script>
+    // 获取起始日期和当前日期
+    var startDate = new Date("2022-02-14");
+    var currentDate = new Date();
 
-        // 将天数显示在页面上
-        document.getElementById("days").innerHTML = "我们在一起已经 " + daysTogether + " 天了！";
-    </script>
+    // 计算天数
+    var timeDiff = Math.abs(currentDate.getTime() - startDate.getTime());
+    var daysTogether = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+    // 将天数显示在页面上
+    document.getElementById("days").innerHTML = "我们在一起已经 " + daysTogether + " 天了！";
+</script>
 </body>
 </html>
