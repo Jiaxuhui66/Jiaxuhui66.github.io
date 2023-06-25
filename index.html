@@ -11,18 +11,27 @@
 
         h1 {
             color: #333;
+            font-size: 60px; /* 增加标题字体大小 */
         }
 
         p {
-            font-size: 24px;
+            font-size: 40px; /* 增加正文字体大小 */
             color: #666;
+        }
+
+        img {
+            width: 80%;
+            max-width: 400px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
         }
     </style>
 </head>
 <body>
-    <h1>我们在一起的天数</h1>
+    
     <p id="days"></p>
-    <img src="./纪念日.jpg" alt="" width="300">
+    <img src="./纪念日.jpg" alt="纪念日图片">
 
     <script>
         // 获取起始日期和当前日期
@@ -37,4 +46,4 @@
         document.getElementById("days").innerHTML = "我们在一起已经 " + daysTogether + " 天了！";
     </script>
 </body>
-</htm
+</html>
