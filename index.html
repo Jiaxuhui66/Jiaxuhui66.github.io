@@ -1,11 +1,73 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8" />
-    <title>title</title>
+  <title>选择正确的药品名字</title>
+  <style>
+    .drug-image {
+      width: 200px;
+      height: 200px;
+    }
+  </style>
 </head>
 <body>
-    <h1>123</h1>
-    <img src="./1.png" alt="">
+  <h1>选择正确的药品名字</h1>
+
+  <div id="drug-container">
+    <img class="drug-image" id="drug-image" src="" alt="Drug Image">
+    <br>
+    <input type="text" id="user-answer" placeholder="请输入药品名字">
+    <button onclick="checkAnswer()">确认</button>
+  </div>
+
+  <script>
+    // 药品图片和名称的数组
+    var drugs = [
+      { image: "drug1.jpg", name: "药品1" },
+      { image: "drug2.jpg", name: "药品2" },
+      { image: "drug3.jpg", name: "药品3" }
+      // 可以添加更多的药品图片和名称
+    ];
+
+    var currentIndex = -1;
+
+    // 初始化页面，显示第一张药品图片
+    function init() {
+      nextDrug();
+    }
+
+    // 检查用户输入的答案是否正确
+    function checkAnswer() {
+      var userAnswer = document.getElementById("user-answer").value;
+      var currentDrug = drugs[currentIndex];
+
+      if (userAnswer.toLowerCase() === currentDrug.name.toLowerCase()) {
+        alert("回答正确！");
+        nextDrug();
+      } else {
+        alert("回答错误！请再试一次。");
+      }
+
+      // 清空输入框
+      document.getElementById("user-answer").value = "";
+    }
+
+    // 显示下一张药品图片
+    function nextDrug() {
+      currentIndex++;
+
+      // 判断是否超出药品数组的长度，如果是，重新开始
+      if (currentIndex >= drugs.length) {
+        currentIndex = 0;
+      }
+
+      var currentDrug = drugs[currentIndex];
+      var drugImage = document.getElementById("drug-image");
+      drugImage.src = currentDrug.image;
+      drugImage.alt = currentDrug.name;
+    }
+
+    // 页面加载完成后初始化
+    window.onload = init;
+  </script>
 </body>
 </html>
