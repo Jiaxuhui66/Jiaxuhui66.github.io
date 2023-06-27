@@ -1,104 +1,81 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>纪念日</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<style>
-body {
-font-family: Arial, sans-serif;
-text-align: center;
-background-color: #f2f2f2;
-}
-
-    h1 {
-        color: #333;
-        font-size: 60px; /* 增加标题字体大小 */
-        position: relative; /* 添加相对定位 */
-    }
-
-    .heart-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .heart {
-        width: 50px;
-        height: 50px;
-        background-color: red;
-        position: relative;
-        transform-origin: center;
-        animation: heartbeat 1s infinite;
-    }
-
-    .heart::before,
-    .heart::after {
-        content: '';
-        position: absolute;
-        width: 50px;
-        height: 50px;
-        background-color: red;
-        border-radius: 50px 50px 0 0;
-    }
-
-    .heart::before {
-        top: -25px;
-        left: 0;
-    }
-
-    .heart::after {
-        top: 0;
-        left: 25px;
-        border-radius: 50px 50px 50px 0;
-    }
-
-    p {
-        font-size: 40px; /* 增加正文字体大小 */
-        color: #666;
-    }
-
-    img {
-        width: 80%;
-        max-width: 400px;
-        height: auto;
-        display: block;
-        margin: 0 auto;
-        border: 2px solid #333; /* Add a border with 2px width and color #333 */
-        padding: 10px; /* Add some padding around the image */
-    }
-
-    @keyframes heartbeat {
-        0% {
-            transform: scale(1) rotate(-45deg);
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3d照片</title>
+    <style>
+        body{
+            margin: 0;
+            background-color: rgb(0, 0, 0);
         }
-        50% {
-            transform: scale(1.2) rotate(-45deg);
+        .scene{
+            width: 600px;
+            height: 300px;
+            /* border: 2px solid red; */
+            margin: 150px auto 0px;
+            perspective: 800px;
         }
-        100% {
-            transform: scale(1) rotate(-45deg);
+        .scene .box{
+            width: 600px;
+            height: 300px;
+            /* background-color: yellow; */
+            transition: all ease 1s;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotate 8s ease infinite;
+
         }
-    }
-</style>
+        /* .scene:hover .box{
+            transform: rotateY(-300deg);
+        } */
+        .box .item{
+            width: 200px;
+            height: 200px;
+            background-color: skyblue;
+            position: absolute;
+            bottom: 0px;
+            left: 50%;
+            margin-left: -100px;
+            transform: rotateY(calc(var(--i) * 40deg)) translateZ(300px);
+        }
+        .box:hover{
+            animation-play-state: paused;
+        }
+        @keyframes rotate{
+            0%{
+                transform: rotateX(-10deg) rotateY(0deg);
+            }
+            100%{
+                transform:rotateX(-10deg) rotateY(-360deg) ;
+            }
+        }
+        .mp3{
+            text-align:center;
+        }
+    </style>
 </head>
 <body>
-<div class="heart-container">
+    
+    <div class="scene">
+        <div class="mp3">
+            <audio autoplay="autoplay" controls="controls"loop="loop" preload="auto"
 
-<p id="days"></p>
-<div class="heart"></div>
-</div>
-<img src="https://i.postimg.cc/bNXGHmfy/image.jpg" alt="纪念日图片">
-
-<script>
-    // 获取起始日期和当前日期
-    var startDate = new Date("2022-02-14");
-    var currentDate = new Date();
-
-    // 计算天数
-    var timeDiff = Math.abs(currentDate.getTime() - startDate.getTime());
-    var daysTogether = Math.ceil(timeDiff / (1000 * 3600 * 24));
-
-    // 将天数显示在页面上
-    document.getElementById("days").innerHTML = "我们在一起已经 " + daysTogether + " 天了！";
-</script>
+    src="http://dl.stream.qqmusic.qq.com/C400003muyLO2XbOzW.m4a?guid=996458996&vkey=27EA590C6F408578D5537ECC849F045C25B1E5CBA2FCA2A786C0BF41C1E5013927B712D451FBA90117094BB65B0090F69F07861CEDE1AA10&uin=&fromtag=120002">
+</audio>
+        </div>
+        <div class="box">
+            <div class="item" style="--i:0"><img src="../1.jpg" width="200" height="200"  alt=""></div>
+            <div class="item" style="--i:1"><img src="../2.jpg" width="200" height="200" alt=""></div>
+            <div class="item" style="--i:2"><img src="../3.jpg" width="200" height="200" alt=""></div>
+            <div class="item" style="--i:3"><img src="../3.jpg" width="200" height="200" alt=""></div>
+            <div class="item" style="--i:4"><img src="../4.jpg" width="200" height="200" alt=""></div>
+            <div class="item" style="--i:5"><img src="../5.jpg" width="200" height="200" alt=""></div>
+            <div class="item" style="--i:6"><img src="../6.jpg" width="200" height="200" alt=""></div>
+            <div class="item" style="--i:7"><img src="../7.jpg" width="200" height="200" alt=""></div>
+            <div class="item" style="--i:8"><img src="../8.jpg" width="200" height="200" alt=""></div>
+        </div>  
+    </div>
 </body>
 </html>
