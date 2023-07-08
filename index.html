@@ -57,6 +57,8 @@
             height: 100%;
         }
         
+
+       
     </style>
 </head>
 <body>
@@ -85,23 +87,86 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="#">首页</a>
+            <a class="navbar-brand" href="#">你干嘛哎呦</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">关于我</a>
+                        <a class="nav-link" href="#">篮球</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="https://user.qzone.qq.com/1804228664?ADUIN=1804228664&ADSESSION=1688793217&ADTAG=CLIENT.QQ.5989_MyTip.0&ADPUBNO=27321&source=namecardhoverstar">QQ空间</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">联系方式</a>
+                        <a class="nav-link" href="#">rap</a>
                     </li>
                 </ul>
             </div>
+            <!DOCTYPE html>
+<html>
+<head>
+  <style>
+    /* .container {
+      position: relative;
+      width: 500px;
+      height: 500px;
+      border: 1px solid #000;
+      overflow: hidden;
+    } */
+    
+    .ball {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-image: url('lanqiu.jpg');
+      background-size: cover;
+      animation: bounce 1s infinite;
+    }
+    
+    @keyframes bounce {
+      0% {
+        top: 0;
+      }
+      50% {
+        top: 400px;
+      }
+      100% {
+        top: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="ball"></div>
+  </div>
+
+  <script>
+    function handleCollision() {
+      var container = document.querySelector('.container');
+      var ball = document.querySelector('.ball');
+      var containerHeight = container.offsetHeight;
+      var ballHeight = ball.offsetHeight;
+
+      var maxY = containerHeight - ballHeight;
+      
+      ball.style.animationPlayState = 'paused'; // 暂停动画
+      ball.style.top = maxY + 'px'; // 将球移动到碰撞点
+      ball.style.animationPlayState = 'running'; // 恢复动画
+    }
+
+    var ball = document.querySelector('.ball');
+    ball.addEventListener('animationend', handleCollision); // 监听动画结束事件
+  </script>
+</body>
+</html>
+
+            
         </div>
     </nav>
     <footer class="bg-dark text-white text-center">
