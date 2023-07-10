@@ -1,179 +1,295 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>爱坤个人博客</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <title>情侣纪念日</title>
     <style>
+        * {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        outline: 0;
+        font-size: 100%;
+        vertical-align: baseline;
+        background: transparent;
+            }
         body {
-            padding-top: 60px;
-            font-family: Arial, sans-serif;
-        }
-
-        header {
-            background-color: #333;
-            color: #fff;
-            padding: 20px;
             text-align: center;
-            position: fixed;
-            width: 100%;
-            z-index: 100;
-        }
-
-        h1 {
-            margin: 0;
-        }
-
-        main {
-            padding: 20px;
-        }
-
-        footer {
-            background-color: #333;
-            color: #fff;
-            padding: 20px;
-            text-align: center;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            z-index: 100;
-        }
-        body {
-            padding: 0;
-            margin: 0;
-        }
-
-        #video-container {
-            position: relative;
-            width: 100%;
-            height: 0;
-            padding-bottom: 56.25%; /* 16:9 比例，根据需求调整 */
-        }
-
-        #video-container video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            font-family: 'Brush Script MT', cursive;
+            background-color: #000000;
+            color: #ffffff;
         }
         
+        p {
+            color: #ffffff;
+            font-size: 60px;
+        }
+        
+        .anniversary {
+            color: #ffffff;
+            font-size: 60px;
+            margin-top: 20px;
+            font-family: 'Brush Script MT', cursive;
+        }
+        
+        .days {
+            color: rgb(222, 33, 102);
+        }
 
+        /* 导航栏 */
+        .navbar {
+            
+            overflow: hidden;
+        }
+        
+        .navbar a {
+            float: left;
+            color: #fff;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 30px;
+        }
+        
+        .navbar a:hover {
+            
+            /* color: #000; */
+        }
+
+        .play-link {
+            color: rgb(255, 255, 255);
+            text-decoration: underline;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 30px;
+            position: absolute;
+            top: 15px; /* 调整上边距 */
+            right: 700px; /* 调整右边距 */
+        }
        
+
+
+        .lyrics {
+    opacity: 0; /* 初始设置歌词透明度为0，隐藏歌词 */
+    transition: opacity 1s ease; /* 添加过渡效果，使歌词的显示和隐藏更平滑 */
+}
     </style>
 </head>
 <body>
-    <header>
-      
-      <div id="video-container">
-        <video controls="" autoplay="" name="media"><source src="https://vdse.bdstatic.com//882134ee7a5880f42fffd06ed94ca946.mp4?authorization=bce-auth-v1%2F40f207e648424f47b2e3dfbb1014b1a5%2F2023-07-08T05%3A47%3A02Z%2F-1%2Fhost%2F0cc074a3e6f2615b9f29ef791273a86acbd7d478bd087dda268d60e3a119f427" type="video/mp4" autoplay muted loop></video>
-    </div>
+    <div class="navbar">
+        <a href="#">首页</a>
+        <a href="https://v.douyin.com/iDse1Dn/">丹宝的dy</a>
+        <a href="https://www.dqsj.cc"></a>
+        <a href=""></a>
+            
+       
+
+    <span class="play-link" onclick="playAudio()">点击播放《决爱》</span>
+
+    <audio id="audio" src="./M5000008rWIC3PtpLa.mp3" >
+        您的浏览器不支持自动播放音乐。
+    </audio>
 
     <script>
-        // 自动播放视频
-        window.addEventListener('DOMContentLoaded', () => {
-            const video = document.querySelector('video');
-            video.play().catch(error => {
-                console.log('自动播放视频错误:', error);
-            });
-        });
+        function playAudio() {
+            var audio = document.getElementById("audio");
+            audio.play();
+        }
     </script>
-        <div class="eat-peas">
-        <div class="head">
-            <div class="eye"></div>
-        </div>
-        <div class="peas"></div>
+        
     </div>
-    </header>
-
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="#">你干嘛哎呦</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">篮球</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://user.qzone.qq.com/1804228664?ADUIN=1804228664&ADSESSION=1688793217&ADTAG=CLIENT.QQ.5989_MyTip.0&ADPUBNO=27321&source=namecardhoverstar">QQ空间</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">rap</a>
-                    </li>
-                </ul>
-            </div>
-            <!DOCTYPE html>
-<html>
-<head>
-  <style>
-    /* .container {
-      position: relative;
-      width: 500px;
-      height: 500px;
-      border: 1px solid #000;
-      overflow: hidden;
-    } */
+    <p>辉辉和丹丹的纪念日</p>
     
-    .ball {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background-image: url('lanqiu.jpg');
-      background-size: cover;
-      animation: bounce 1s infinite;
-    }
+    <div id="anniversary" class="anniversary">
+        正在计算纪念日时长...
+    </div>
     
-    @keyframes bounce {
-      0% {
-        top: 0;
-      }
-      50% {
-        top: 400px;
-      }
-      100% {
-        top: 0;
-      }
+    <iframe src="./index copy.htm" style="width:100%; height:500px;"></iframe>
+
+    <div id="lyrics" class="lyrics"></div>
+
+
+
+
+
+    <script>
+        function updateAnniversarySeconds() {
+            var start = new Date(2022, 2, 14); // 替换为你和你伴侣的纪念日日期（注意月份从0开始）
+            var today = new Date();
+            var timeDifference = today - start;
+            var seconds = Math.floor(timeDifference / 1000) % 60;
+
+            var secondsElement = document.getElementById("seconds");
+            secondsElement.textContent = seconds + " 秒";
+        }
+
+        function calculateAnniversaryDays() {
+            var start = new Date(2022, 1, 14); // 替换为你和你伴侣的纪念日日期（注意月份从0开始）
+            var today = new Date();
+            var timeDifference = today - start;
+            var seconds = Math.floor(timeDifference / 1000) % 60;
+            var minutes = Math.floor(timeDifference / (1000 * 60)) % 60;
+            var hours = Math.floor(timeDifference / (1000 * 60 * 60)) % 24;
+            var days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+
+            var anniversaryElement = document.getElementById("anniversary");
+            anniversaryElement.innerHTML = "我们已经在一起 <span class='days'>" + days + "</span> 天";
+            anniversaryElement.innerHTML += "<br>";
+            anniversaryElement.innerHTML += hours + "小时 ";
+
+            anniversaryElement.innerHTML += minutes + "分钟 ";
+
+            anniversaryElement.innerHTML += "<span id='seconds'>" + seconds + "秒</span>";
+        }
+
+        // 页面加载完成后调用计算函数
+        window.onload = function() {
+            calculateAnniversaryDays();
+            setInterval(updateAnniversarySeconds, 1000);
+        };
+        
+        function playAudio() {
+            var audio = document.getElementById("audio");
+            audio.play();
+        }
+    
+    </script>
+
+<script src="https://unpkg.com/lyricist"></script>
+<script>
+    function playAudio() {
+        var audio = document.getElementById("audio");
+        var lyricsContainer = document.getElementById("lyrics");
+
+        audio.play();
+
+        // 解析歌词文件
+        fetch("./")
+            .then(response => response.text())
+            .then(data => {
+                var lyricist = new Lyricist(data);
+
+                // 更新歌词显示
+                function updateLyrics() {
+                    var currentTime = audio.currentTime;
+                    var line = lyricist.getLineAtTime(currentTime);
+                    if (line) {
+                        lyricsContainer.innerHTML = line.text;
+                    } else {
+                        lyricsContainer.innerHTML = "";
+                    }
+                }
+
+                // 监听音频时间更新事件
+                audio.addEventListener("timeupdate", updateLyrics);
+            });
     }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <div class="ball"></div>
-  </div>
+</script>
 
-  <script>
-    function handleCollision() {
-      var container = document.querySelector('.container');
-      var ball = document.querySelector('.ball');
-      var containerHeight = container.offsetHeight;
-      var ballHeight = ball.offsetHeight;
 
-      var maxY = containerHeight - ballHeight;
-      
-      ball.style.animationPlayState = 'paused'; // 暂停动画
-      ball.style.top = maxY + 'px'; // 将球移动到碰撞点
-      ball.style.animationPlayState = 'running'; // 恢复动画
+<script>
+    var lyricsContainer = document.getElementById("lyrics");
+    var audio = document.getElementById("audio");
+
+    var lyricsText = `[00:00.0]诀爱 (《苍兰诀》电视剧燃爱主题曲) - 詹雯婷
+[00:01.67]词：姜楠/陈恬
+[00:01.86]曲：姜楠/陈恬
+[00:02.05]编曲：高嘉欣/陈浩田/黄一
+[00:02.46]制作人：王一栩/黄一
+[00:02.76]吉他：任冰
+[00:02.88]配唱制作人：詹雯婷 Faye
+[00:03.19]配唱制作统筹：林佩薇 AGG
+[00:03.52]歌唱指导：吴小明 Lucy
+[00:03.79]录音师：陈志翔Sean
+[00:04.01]录音室：BB Road Studio
+[00:04.21]制作助理：杨君颖 Karen
+[00:04.46]和声设计：沈锦天/黄一
+[00:04.8]和声：张恋歌
+[00:04.96]声音编辑处理：陈志翔Sean
+[00:05.29]混音：刘俊杰
+[00:06.07]母带：刘俊杰
+[00:06.78]制作统筹：孙雅哲
+[00:07.71]A&R统筹：孙雅哲
+[00:08.56]监制：王一栩/张宇成
+[00:09.91]特别鸣谢：詹雯婷工作室
+[00:11.46]SP：炙热星河
+[00:17.3]等天崩地裂的那一瞬间
+[00:20.8]待坍塌破碎了睁开双眼
+[00:23.77]无处安放灵魂
+[00:26.49]只能降落
+[00:30.9]若灵魂相结在天地之间
+[00:34.35]看山盟海誓引一场惊觉
+[00:37.3]没有你的世界
+[00:39.95]我无力承受
+[00:43.9]拔情诀爱的最后
+[00:47.12]指尖缠绕的温柔
+[00:50.58]化作一把锋利剑刺向了我
+[00:56.03]诀爱
+[00:58.48]模糊光阴距离
+[01:01.78]连时间都暂停
+[01:05.24]全都只是因为你
+[01:09.63]确定
+[01:12.14]你是心中唯一
+[01:15.32]说再见来不及
+[01:18.9]开不了口的惋惜
+[01:23.14]来不及
+[01:38.68]若灵魂相结在天地之间
+[01:41.89]看山盟海誓引一场惊觉
+[01:44.84]没有你的世界
+[01:47.36]我无力承受
+[01:51.259995]拔情诀爱的最后
+[01:54.8]指尖缠绕的温柔
+[01:58.08]化作一把锋利剑刺向了我
+[02:03.71]诀爱
+[02:06.14]模糊光阴距离
+[02:09.39]连时间都暂停
+[02:12.82]全都只是因为你
+[02:17.24]确定
+[02:19.55]你是心中唯一
+[02:22.98]说再见来不及
+[02:26.47]开不了口的惋惜
+[02:30.74]来不及
+[02:32.36]Woah
+[02:44.37]来不及
+[02:45.95999]Woah
+[02:57.18]诀别的爱
+`;
+
+    // 解析歌词文本并将其转换为数组形式
+    var lyrics = lyricsText.split("\n").map(function(line) {
+        var timeAndLyric = line.split("]");
+        var time = timeAndLyric[0].substring(1);
+        var lyric = timeAndLyric[1];
+        return {
+            time: time,
+            lyric: lyric
+        };
+    });
+
+    // 更新歌词的显示和隐藏
+    function updateLyrics() {
+        var currentTime = audio.currentTime;
+        for (var i = 0; i < lyrics.length; i++) {
+            if (currentTime >= calculateTimeInSeconds(lyrics[i].time) && (!lyrics[i + 1] || currentTime < calculateTimeInSeconds(lyrics[i + 1].time))) {
+                lyricsContainer.innerText = lyrics[i].lyric;
+                lyricsContainer.style.opacity = 1;
+            } else {
+                lyricsContainer.style.opacity = 0;
+            }
+        }
     }
 
-    var ball = document.querySelector('.ball');
-    ball.addEventListener('animationend', handleCollision); // 监听动画结束事件
-  </script>
+    // 计算时间（以秒为单位）
+    function calculateTimeInSeconds(time) {
+        var timeParts = time.split(":");
+        var minutes = parseInt(timeParts[0]);
+        var seconds = parseFloat(timeParts[1]);
+        return minutes * 60 + seconds;
+    }
+
+    // 监听音频时间更新事件
+    audio.addEventListener("timeupdate", updateLyrics);
+</script>
+
+
 </body>
 </html>
-
-            
-        </div>
-    </nav>
-    <footer class="bg-dark text-white text-center">
-        &copy; 2023 爱坤的个人博客. 版权所有.
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
-
