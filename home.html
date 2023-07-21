@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>主页</title>
+</head>
+<body>
+
+  <button id="logoutButton">退出登录</button>
+  <br><br>
+  <button id="viewUserListButton">查看用户列表</button>
+
+  <div id="userListModal" style="display: none;">
+    <h2>用户列表</h2>
+    <ul id="userList"></ul>
+
+    <h2>添加用户</h2>
+    <form id="addUserForm">
+      <label for="username">用户名:</label>
+      <input type="text" id="username" required>
+
+      <label for="password">密码:</label>
+      <input type="password" id="password" required>
+
+      <button type="submit">添加</button>
+    </form>
+
+    <!-- <h2>编辑账号密码</h2> -->
+    <form id="editUserForm" style="display: none;">
+      <label for="editUsername">用户名:</label>
+      <input type="text" id="editUsername" required>
+
+      <label for="editPassword">密码:</label>
+      <input type="text" id="editPassword" required>
+
+      <button type="submit">保存</button>
+    </form>
+  </div>
+
+  <script>
+    var logoutButton = document.getElementById("logoutButton");
+    var viewUserListButton = document.getElementById("viewUserListButton");
+    var userListModal = document.getElementById("userListModal");
+    var userList = [];
+
+    var addUserForm = document.getElementById("addUserForm");
+    var usernameInput = document.getElementById("username");
+    var passwordInput = document.getElementById("password");
+
+    var editUserForm = document.getElementById("editUserForm");
+    var editUsernameInput = document.getElementById("editUsername");
+    var editPasswordInput = document.getElementById("editPassword");
+    var editingUserId = "";
+
+    // 退出登录按钮点击处理函数
+    logoutButton.addEventListener("click", function() {
+      // 执行退出登录的操作
+      // ...
+
+      // 示例操作：重定向回登录页面
+      window.location.href = "index.html";
+    });
+
+    // 查看用户列表按钮点击处理函数
+    viewUserListButton.addEventListener("click", function() {
+      populateUserList(); // 显示用户列表
+      userListModal.style.display = "block"; // 显示模态框
+    });
+
+    // 添加用户表单提交处理函数
+    addUserForm.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      var username = usernameInput.value.trim();
+      var password = passwordInput.value.trim();
+
+      if (username && password) {
+        var newUser = { username: username, password: password };
+        userList.push(newUser);
+
+                // 示例操作：更新用户列表存储
+                localStorage.setItem("userList", JSON.stringify(userList));
+
+alert("已添加用户 " + username);
+
+usernameInput.value = "";
+passwordInput.value = "";
+populateUserList(); // 刷新用户列表
+}
+});
+
+// 编辑用户按钮点击处理函数
+function editUser(userId) {
+var user = userList.find(function(user) {
+return user.id === userId;
+});
+
+if (user) {
+editUsernameInput.value = user.username;
+editPasswordInput.value = user.password;
+editingUserId = userId;
+
+// 隐藏添加用户表单并显示编辑用户表单
+addUserForm.style.display = "none";
+editUserForm.style.display = "block";
+}
+}
+
+// 编辑用户表单提交处理函数
+editUserForm.addEventListener("submit", function(event) {
+event.preventDefault();
+
+var updatedUsername = editUsernameInput.value.trim();
+var updatedPassword = editPasswordInput.value.trim();
+
+if (editingUserId && updatedUsername && updatedPassword) {
+var userIndex = userList.findIndex(function(user) {
+  return user.id === editingUserId;
+});
+
+if (userIndex > -1) {
+  userList[userIndex].username = updatedUsername;
+  userList[userIndex].password = updatedPassword;
+
+  // 示例操作：更新用户列表存储
+  localStorage.setItem("userList", JSON.stringify(userList));
+
+  alert("已保存用户信息");
+
+  editUsernameInput.value = "";
+  editPasswordInput.value = "";
+  editingUserId = "";
+
+  // 隐藏编辑用户表单并显示添加用户表单
+  editUserForm.style.display = "none";
+  addUserForm.style.display = "block";
+
+  populateUserList(); // 刷新用户列表
+}
+}
+});
+
+// 删除用户按钮点击处理函数
+function deleteUser(userId) {
+userList = userList.filter(function(user) {
+return user.id !== userId;
+});
+
+// 示例操作：更新用户列表存储
+localStorage.setItem("userList", JSON.stringify(userList));
+
+alert("已删除用户");
+populateUserList(); // 刷新用户列表
+}
+
+// 填充用户列表
+function populateUserList() {
+var ul = document.getElementById("userList");
+ul.innerHTML = "";
+
+var storedUserList = localStorage.getItem("userList");
+if (storedUserList) {
+userList = JSON.parse(storedUserList);
+}
+
+userList.forEach(function(user) {
+var li = document.createElement("li");
+
+var userText = document.createElement("span");
+userText.innerText = "用户名: " + user.username + ", 密码: " + user.password;
+li.appendChild(userText);
+
+// var editButton = document.createElement("button");
+// editButton.innerText = "编辑";
+// editButton.addEventListener("click", function() {
+//   editUser(user.id);
+// });
+// li.appendChild(editButton);
+
+var deleteButton = document.createElement("button");
+deleteButton.innerText = "删除";
+deleteButton.addEventListener("click", function() {
+  deleteUser(user.id);
+});
+li.appendChild(deleteButton);
+
+ul.appendChild(li);
+});
+}
+</script>
+</body>
+</html>
