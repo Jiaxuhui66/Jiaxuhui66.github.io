@@ -1,181 +1,369 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>登录/注册</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>点餐系统</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            margin: 20px;
+            /* background-color: rgb(234, 173, 173); */
+            
+        }
+
+        #sidebar {
+            width: 150px;
+            height: 1000px;
+            /* background-color: #f4e4e4; */
+            color: white;
+            padding: 10px;
+        }
+
+        #content {
+            flex-grow: 1;
+            margin-left: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .menu-item {
+            background-color: #fff;
+            border: 1px solid #000000;
+            padding: 10px;
+            margin: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .cart-item, .order-item {
+            background-color: #fff;
+            border: 1px solid #d33333;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .checkout-btn {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #cartContainer, #historyContainer {
+            display: none;
+        }
+
+        #infoBox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            display: none;
+        }
+
+        .nav-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            text-align: left;
+            background-color: #555;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .nav-btn:hover {
+            background-color: #777;
+        }
+
+        .menu-item img, .cart-item img, .order-item img {
+            max-width: 80px;
+            max-height: 60px;
+            margin-right: 10px;
+        }
+
+        #totalAmount {
+            font-weight: bold;
+        }
+
+        
+    </style>
 </head>
 <body>
-  <div id="container">
-    <div id="loginPage">
-      <h1>登录</h1>
-      <form id="loginForm">
-        <label for="loginUsername">用户名:</label>
-        <input type="text" id="loginUsername" name="loginUsername"><br><br>
-        <label for="loginPassword">密码:</label>
-        <input type="password" id="loginPassword" name="loginPassword"><br><br>
-        <input type="submit" value="登录">
-        <p><a href="#" id="goToRegister">没有账号？去注册</a></p>
-      </form>
-    </div>
-
-    <div id="registerPage" style="display: none;">
-      <h1>注册</h1>
-      <form id="registerForm">
-        <label for="registerUsername">用户名:</label>
-        <input type="text" id="registerUsername" name="registerUsername"><br><br>
-        <label for="registerPassword">密码:</label>
-        <input type="password" id="registerPassword" name="registerPassword"><br><br>
-        <input type="submit" value="注册">
-        <p><a href="#" id="goToLogin">已有账号？去登录</a></p>
-      </form>
-    </div>
-  </div>
-
-<!--   <h1>用户列表</h1>
-  <ul id="userList"></ul> -->
-
-  <script>
-    var container = document.getElementById("container");
-    var loginPage = document.getElementById("loginPage");
-    var registerPage = document.getElementById("registerPage");
-    var goToRegister = document.getElementById("goToRegister");
-    var goToLogin = document.getElementById("goToLogin");
-
-    // 隐藏注册页面，显示登录页面
-    goToLogin.addEventListener("click", function(event) {
-      event.preventDefault();
-      registerPage.style.display = "none";
-      loginPage.style.display = "block";
-    });
-
-    // 隐藏登录页面，显示注册页面
-    goToRegister.addEventListener("click", function(event) {
-      event.preventDefault();
-      loginPage.style.display = "none";
-      registerPage.style.display = "block";
-    });
-
-    // 注册表单提交处理函数
-    document.getElementById("registerForm").addEventListener("submit", function(event) {
-      event.preventDefault(); // 阻止表单的默认提交行为
-
-      // 获取表单字段的值
-      var username = document.getElementById("registerUsername").value;
-      var password = document.getElementById("registerPassword").value;
-
-      // 获取已存在的用户列表
-      var userList = [];
-      var storedUserList = localStorage.getItem("userList");
-      if (storedUserList) {
-        userList = JSON.parse(storedUserList);
-      }
-
-      // 检查用户是否已存在
-      var existingUser = userList.find(function(user) {
-        return user.username === username;
-      });
-
-      if (existingUser) {
-        alert('用户名已存在');
-      } else {
-        // 将新用户添加到列表中
-        userList.push({ username: username, password: password });
-
-        // 保存更新后的用户列表到localStorage
-        localStorage.setItem("userList", JSON.stringify(userList));
-
-        alert('注册成功');
-      }
-
-      refreshUserList(); // 刷新用户列表
-    });
-
-    // 登录表单提交处理函数
     
-   document.getElementById("loginForm").addEventListener("submit", function(event) {
-  event.preventDefault();
+    <div id="sidebar">
+        <h2 style="color: #af4e4c;">餐厅点餐系统</h2>
+        <button class="nav-btn" onclick="showMenu()">菜单</button>
+        <button class="nav-btn" onclick="showCart()">购物车</button>
+        <button class="nav-btn" onclick="showHistory()">历史订单</button>
+        <button class="nav-btn checkout-btn" onclick="checkout()">结账</button>
+        <button class="nav-btn" onclick="showAddItemPage()">添加菜品</button> <!-- 新添加的按钮 -->
+    </div>
 
-  // 获取表单字段的值
-  var username = document.getElementById("loginUsername").value;
-  var password = document.getElementById("loginPassword").value;
+    <div id="content">
+        <!-- <h1>餐厅点餐系统</h1> -->
+        <div>
 
-  // 获取已存在的用户列表
-  var userList = [];
-  var storedUserList = localStorage.getItem("userList");
-  if (storedUserList) {
-    userList = JSON.parse(storedUserList);
-  }
+        <div id="menu">
+            <!-- 菜单项将通过 JavaScript 动态生成 -->
+        </div>
 
-  // 检查登录信息是否正确
-  var loggedInUser = userList.find(function(user) {
-    return user.username === username && user.password === password;
-  });
+        <div id="cartContainer">
+            <h2>购物车</h2>
+            <div id="cart">
+                <!-- 购物车内容将通过 JavaScript 动态生成 -->
+            </div>
 
-  if (loggedInUser) {
-    alert('登录成功');
-    window.location.href = "home.html"; // 页面重定向到home.html
-  } else {
-    alert('用户名或密码错误');
-  }
-});
+            <p id="totalAmount">总金额：￥0.00</p>
+            <button class="checkout-btn" onclick="checkout()">结账</button>
+        </div>
 
-     // 删除用户
-     function deleteUser(username) {
-      // 获取已存在的用户列表
-      var userList = [];
-      var storedUserList = localStorage.getItem("userList");
-      if (storedUserList) {
-        userList = JSON.parse(storedUserList);
-      }
+        <div id="historyContainer">
+            <h2>历史订单</h2>
+            <!-- 历史订单内容将通过 JavaScript 动态生成 -->
+        </div>
+    </div>
+    <div id="infoBox">已加入购物车</div>
 
-      // 在列表中查找并删除指定用户名的用户
-      var index = -1;
-      for (var i = 0; i < userList.length; i++) {
-        if (userList[i].username === username) {
-          index = i;
-          break;
+    <script>
+        var menuItems = [
+            { "id": 1, "name": "火锅底料", "price": 50.0, "image": "img/火锅底料.jpg" },
+            { "id": 4, "name": "蒜香小龙虾", "price": 88.0, "image": "img/蒜香小龙虾.jpg" },
+            { "id": 2, "name": "海虾", "price": 48.0, "image": "img/海虾.jpg" },
+            { "id": 3, "name": "麻婆豆腐", "price": 20.0, "image": "img/麻婆豆腐.jpg" },
+            { "id": 4, "name": "梅菜扣肉", "price": 66.0, "image": "img/梅菜扣肉.jpg" },
+            { "id": 5, "name": "木耳", "price": 18.0, "image": "img/木耳.jpg" },
+            { "id": 6, "name": "拍黄瓜", "price": 18.0, "image": "img/拍黄瓜.jpg" },
+            { "id": 7, "name": "肉卷", "price": 30.0, "image": "img/肉卷.jpg" },
+            { "id": 8, "name": "酸菜鱼", "price": 99.0, "image": "img/酸菜鱼.jpg" },
+            // 添加更多菜品...
+        ];
+
+        var cart = [];
+        var orderHistory = [];
+
+        function renderMenuAndCart() {
+            var menuHtml = "";
+            var cartHtml = "";
+
+            menuItems.forEach(function (item) {
+                menuHtml += '<div class="menu-item">' +
+                    '<img src="' + item.image + '" alt="' + item.name + '">' +
+                    '<span>' + item.name + ' - ￥' + item.price.toFixed(2) + '</span>' +
+                    '<button onclick="addToCart(' + item.id + ')">加入购物车</button>' +
+                    '</div>';
+            });
+
+            cart.forEach(function (item) {
+                cartHtml += '<div class="cart-item">' +
+                    '<img src="' + item.image + '" alt="' + item.name + '">' +
+                    '<span>' + item.name + ' - ￥' + item.price.toFixed(2) + '</span>' +
+                    '<button onclick="removeFromCart(' + item.id + ')">移出购物车</button>' +
+                    '</div>';
+            });
+
+            var totalAmount = cart.reduce(function (acc, item) {
+                return acc + item.price;
+            }, 0);
+
+            document.getElementById('menu').innerHTML = menuHtml;
+            document.getElementById('cart').innerHTML = cartHtml;
+            document.getElementById('totalAmount').innerText = '总金额：￥' + totalAmount.toFixed(2);
         }
-      }
-      if (index > -1) {
-        userList.splice(index, 1);
-      }
 
-      // 更新localStorage中的用户列表
-      localStorage.setItem("userList", JSON.stringify(userList));
+        function addToCart(itemId) {
+            var item = menuItems.find(function (x) { return x.id === itemId; });
+            if (item) {
+                cart.push(item);
+                renderMenuAndCart();
+                showInfoBox(item.name); // 显示信息提示框，并传入菜品名字
+            }
+        }
 
-      refreshUserList(); // 刷新用户列表
+        function removeFromCart(itemId) {
+            var index = cart.findIndex(function (x) { return x.id === itemId; });
+            if (index !== -1) {
+                cart.splice(index, 1);
+                renderMenuAndCart();
+            }
+        }
+
+        function checkout() {
+    if (cart.length === 0) {
+        alert('请先选择菜品再结账！');
+        return; // 阻止执行下面的结账逻辑
     }
 
-    // 获取用户列表
-    function refreshUserList() {
-      // 获取已存在的用户列表
-      var userList = [];
-      var storedUserList = localStorage.getItem("userList");
-      if (storedUserList) {
-        userList = JSON.parse(storedUserList);
-      }
+    var orderSummary = "您的订单包含:\n";
+    cart.forEach(function (item) {
+        orderSummary += item.name + ' - ￥' + item.price.toFixed(2) + '\n';
+    });
 
-      // 清空用户列表
-      var userListElement = document.getElementById("userList");
-      userListElement.innerHTML = "";
+    var totalAmount = cart.reduce(function (acc, item) {
+        return acc + item.price;
+    }, 0);
 
-      // 添加用户到列表中
-      userList.forEach(function(user) {
-        var li = document.createElement("li");
-        li.textContent = user.username + " - " + user.password;
-        userListElement.appendChild(li);
+    orderSummary += "\n总金额：￥" + totalAmount.toFixed(2) + "\n是否确认下单？";
 
-        var deleteButton = document.createElement("button");
-        deleteButton.textContent = "删除";
-        deleteButton.addEventListener("click", function() {
-          deleteUser(user.username);
-        });
-        li.appendChild(deleteButton);
-      });
-      // 页面加载时刷新用户列表
-document.addEventListener("DOMContentLoaded", function() {
-  refreshUserList();
+    var orderNumber = generateOrderNumber();
+    orderSummary += "\n订单号：" + orderNumber;
+
+    if (confirm(orderSummary)) {
+        alert('订单结算成功！');
+        orderHistory.push({ orderNumber: orderNumber, items: cart, totalAmount: totalAmount });
+        cart = [];
+        renderMenuAndCart();
+        toggleCart(); // 结账后隐藏购物车
+    }
+}
+
+
+        function showMenu() {
+            document.getElementById('menu').style.display = 'block';
+            document.getElementById('cartContainer').style.display = 'none';
+            document.getElementById('historyContainer').style.display = 'none';
+        }
+
+        function showCart() {
+            document.getElementById('menu').style.display = 'none';
+            document.getElementById('cartContainer').style.display = 'block';
+            document.getElementById('historyContainer').style.display = 'none';
+        }
+
+        function showHistory() {
+            renderOrderHistory();
+            document.getElementById('menu').style.display = 'none';
+            document.getElementById('cartContainer').style.display = 'none';
+            document.getElementById('historyContainer').style.display = 'block';
+        }
+
+        function showInfoBox(itemName) {
+            var infoBox = document.getElementById('infoBox');
+            infoBox.innerText = '已加入购物车：' + itemName;
+            infoBox.style.display = 'block';
+
+            // 隐藏信息提示框，延迟1.5秒钟
+            setTimeout(function() {
+                infoBox.style.display = 'none';
+            }, 1500);
+        }
+
+        function generateOrderNumber() {
+            var now = new Date();
+            var year = now.getFullYear();
+            var month = now.getMonth() + 1;
+            var day = now.getDate();
+            var hours = now.getHours();
+            var minutes = now.getMinutes();
+            var seconds = now.getSeconds();
+
+            return '' + year + padNumber(month) + padNumber(day) + padNumber(hours) + padNumber(minutes) + padNumber(seconds);
+        }
+
+        function padNumber(num) {
+            return num < 10 ? '0' + num : '' + num;
+        }
+
+        function renderOrderHistory() {
+            var historyHtml = "";
+            orderHistory.forEach(function (order) {
+                historyHtml += '<div class="order-item">';
+                historyHtml += '<h3>订单号 #' + order.orderNumber + '</h3>';
+                order.items.forEach(function (item) {
+                    historyHtml += '<div>' +
+                        '<img src="' + item.image + '" alt="' + item.name + '">' +
+                        '<span>' + item.name + ' - ￥' + item.price.toFixed(2) + '</span>' +
+                        '</div>';
+                });
+                historyHtml += '<p>总金额：￥' + order.totalAmount.toFixed(2) + '</p>';
+                historyHtml += '</div>';
+            });
+            document.getElementById('historyContainer').innerHTML = historyHtml;
+        }
+
+        renderMenuAndCart();
+
+        function showAddItemPage() {
+    window.location.href = 'add_item.html';
+}
+
+// 在点餐系统的脚本中添加以下代码
+window.addEventListener('message', function (event) {
+    if (event.data.type === 'addMenuItem') {
+        var newItem = event.data.data;
+
+        // 在这里将新菜品添加到点餐系统的菜单中
+        // 例如，可以将 newItem 添加到 menuItems 数组中
+        menuItems.push(newItem);
+
+        // 调用相应的渲染函数来更新菜单显示
+        renderMenuAndCart();
+    }
 });
+
+window.addEventListener('message', function (event) {
+    if (event.data.type === 'addMenuItem') {
+        var newItem = event.data.data;
+
+        // 在这里将新菜品添加到点餐系统的菜单中
+        // 例如，可以将 newItem 添加到 menuItems 数组中
+        menuItems.push(newItem);
+
+        // 调用相应的渲染函数来更新菜单显示
+        renderMenuAndCart();
     }
-  </script>
+});
+
+// 在已有的 JavaScript 代码后添加以下内容
+
+// 搜索功能
+function searchMenu() {
+    var searchTerm = document.getElementById('searchInput').value.toLowerCase();
+
+    // 使用 filter 方法过滤菜单项
+    var searchResults = menuItems.filter(function (item) {
+        return item.name.toLowerCase().includes(searchTerm);
+    });
+
+    // 渲染搜索结果
+    renderSearchResults(searchResults);
+}
+
+// 渲染搜索结果
+function renderSearchResults(results) {
+    var resultsHtml = "";
+
+    results.forEach(function (item) {
+        resultsHtml += '<div class="menu-item">' +
+            '<img src="' + item.image + '" alt="' + item.name + '">' +
+            '<span>' + item.name + ' - ￥' + item.price.toFixed(2) + '</span>' +
+            '<button onclick="addToCart(' + item.id + ')">加入购物车</button>' +
+            '</div>';
+    });
+
+    // 将搜索结果显示在页面上
+    document.getElementById('searchResults').innerHTML = resultsHtml;
+}
+
+// 在页面加载时调用 renderMenuAndCart，确保初始状态显示全部菜品
+renderMenuAndCart();
+
+    </script>
 </body>
 </html>
