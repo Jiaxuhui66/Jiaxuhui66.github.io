@@ -1,0 +1,98 @@
+<!-- add_item.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>添加菜品</title>
+    <style>
+        /* 添加所需的样式 */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 20px auto;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>添加菜品</h1>
+
+    <form id="loginForm">
+        <h2>登录</h2>
+        <input type="text" placeholder="123" id="username" required>
+        <input type="password" placeholder="123" id="password" required>
+        <button type="button" onclick="login()">登录</button>
+    </form>
+
+    <form id="addItemForm" style="display: none;">
+        <h2>添加菜品</h2>
+        <input type="text" placeholder="菜品名称" id="itemName" required>
+        <input type="number" placeholder="价格" id="itemPrice" step="0.01" required>
+        <input type="url" placeholder="图片 URL" id="itemImage" required>
+        <button type="button" onclick="addItem()">添加菜品</button>
+    </form>
+
+    <script>
+        function login() {
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+
+            // Add your authentication logic here
+            if (username === '123' && password === '123') {
+                document.getElementById('loginForm').style.display = 'none';
+                document.getElementById('addItemForm').style.display = 'block';
+            } else {
+                alert('登录失败，请检查账号和密码。');
+            }
+        }
+
+        function addItem() {
+            var itemName = document.getElementById('itemName').value;
+            var itemPrice = parseFloat(document.getElementById('itemPrice').value);
+            var itemImage = document.getElementById('itemImage').value;
+
+            // Add your logic to add the item to the menu
+            // For now, you can log the values to the console
+            console.log('Item Name:', itemName);
+            console.log('Item Price:', itemPrice);
+            console.log('Item Image:', itemImage);
+        }
+        function addItem() {
+    var itemName = document.getElementById('itemName').value;
+    var itemPrice = parseFloat(document.getElementById('itemPrice').value);
+    var itemImage = document.getElementById('itemImage').value;
+
+    // 通过 postMessage 向父窗口发送数据
+    window.parent.postMessage({
+        type: 'addMenuItem',
+        data: {
+            name: itemName,
+            price: itemPrice,
+            image: itemImage
+        }
+    }, '*');
+}
+
+    </script>
+</body>
+</html>
